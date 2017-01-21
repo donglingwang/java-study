@@ -1,4 +1,4 @@
-package dlwang.study.crypt;
+package dlwang.study.crypt.aes;
 
 import java.security.NoSuchAlgorithmException;
 import java.security.Security;
