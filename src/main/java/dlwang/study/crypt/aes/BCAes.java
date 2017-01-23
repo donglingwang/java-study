@@ -13,25 +13,26 @@ import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class BCAes {
 
+	public static final String ALGORITHM = "AES/ECB/PKCS7Padding";  
+	
 	static {
 		Security.addProvider(new BouncyCastleProvider());
 	}
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		// 生成KEY
 		KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-		keyGenerator.init(256);
+		keyGenerator.init(116);
 		SecretKey secretKey = keyGenerator.generateKey();
 		byte [] keyBytes = secretKey.getEncoded();
 		
-		byte [] mykey = "12345678123456781234567812345678".getBytes();
-		byte [] result = Aes256Encode("wangdongling", mykey);
+		//byte [] mykey = "12345678123456781234567812345678".getBytes();
+		byte [] result = Aes256Encode("wangdongling", keyBytes);
 		System.out.println(Base64.encodeBase64String(result));
-		System.out.println(Aes256Decode(result, mykey));
+		System.out.println(Aes256Decode(result, keyBytes));
 		
 	}
 	
 	
-    public static final String ALGORITHM = "AES/ECB/PKCS7Padding";  
     
     /** 
      * @param  String str  要被加密的字符串 
