@@ -39,11 +39,30 @@
     	<artifactId>bcprov-ext-jdk15on</artifactId>
     	<version>1.46</version>
 	</dependency>
-
+	
+	<!-- httpclient4 -->
+    <dependency>
+         <groupId>org.apache.httpcomponents</groupId>
+         <artifactId>httpclient</artifactId>
+         <version>4.3.6</version>
+    </dependency>
+    <dependency>
+         <groupId>org.apache.httpcomponents</groupId>
+         <artifactId>httpmime</artifactId>
+         <version>4.3.6</version>
+     </dependency>
+     
+     
+   	<!-- json -->
 	<dependency>
-			<groupId>com.vivo.internet</groupId>
-		    <artifactId>security-sdk</artifactId>
-		    <version>1.0.4-20170104-RELEASE</version>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-core-asl</artifactId>
+		<version>1.9.3</version>
+	</dependency>
+	<dependency>
+		<groupId>org.codehaus.jackson</groupId>
+		<artifactId>jackson-mapper-asl</artifactId>
+		<version>1.9.3</version>
 	</dependency>
   </dependencies>
   <build>

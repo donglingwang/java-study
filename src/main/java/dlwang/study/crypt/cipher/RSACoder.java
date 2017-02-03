@@ -15,6 +15,10 @@ import java.util.Map;
 
 import javax.crypto.Cipher;
 
+import org.apache.commons.codec.DecoderException;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.binary.Hex;
+
 /**
  * RSA非对称加密算法
  * @author DongLing
@@ -99,6 +103,50 @@ public class RSACoder {
 		return cipher.doFinal(data);
 	}
 	
+	/**
+	 * 使用私钥进行解密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] decryptByPrivateKey(byte [] data, String key) throws Exception {
+		return decryptByPrivateKey(data, toKey(key));
+	}
+	
+	/**
+	 * 使用公钥进行解密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] decryptByPublicKey(byte [] data, String key) throws Exception {
+		return decryptByPublicKey(data, toKey(key));
+	}
+	
+	/**
+	 * 使用私钥进行加密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] encryptByPrivateKey(byte [] data, String key) throws Exception {
+		return encryptByPrivateKey(data, toKey(key));
+	}
+	
+	/**
+	 * 使用公钥进行加密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] encryptByPublicKey(byte [] data, String key) throws Exception {
+		return encryptByPublicKey(data, toKey(key));
+	}
+	
 	public static byte [] getPrivateKey(Map<String, Object> keyMap) throws Exception {
 		Key key = (Key) keyMap.get(PRIVATE_KEY);
 		return key.getEncoded();
@@ -124,5 +172,10 @@ public class RSACoder {
 		keyMap.put(PRIVATE_KEY, privateKey);
 		keyMap.put(PUBLIC_KEY, publicKey);
 		return keyMap;
+	}
+	
+	
+	public static byte [] toKey(String rsaKey) throws Exception {
+		return Base64.decodeBase64(rsaKey);
 	}
 }

@@ -8,6 +8,7 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
+import org.apache.commons.codec.binary.Base64;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 public class AESCoder {
@@ -54,6 +55,33 @@ public class AESCoder {
 		return cipher.doFinal(data);
 	}
 	
+	public static byte [] getKey(String aesKey) {
+		return Base64.decodeBase64(aesKey);
+	}
+	
+	
+	/**
+	 * 解密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] decrypt(byte [] data,String key) throws Exception {
+		return decrypt(data, getKey(key));
+	}
+	
+	/**
+	 * 加密
+	 * @param data
+	 * @param key
+	 * @return
+	 * @throws Exception
+	 */
+	public static byte [] encrypt(byte [] data,String key) throws Exception {
+		return encrypt(data, getKey(key));
+	}
+	
 	/**
 	 * 初始化Key
 	 * @return
@@ -64,5 +92,10 @@ public class AESCoder {
 		kg.init(256);
 		SecretKey secretKey = kg.generateKey();
 		return secretKey.getEncoded();
+	}
+	
+	public static String initKeyString () throws Exception {
+		byte [] key = initKey();
+		return Base64.encodeBase64String(key);
 	}
 }
