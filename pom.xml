@@ -33,6 +33,18 @@
 		<artifactId>bcprov-jdk16</artifactId>
 		<version>1.45</version>
 	</dependency>
+	
+	<dependency>
+    	<groupId>org.bouncycastle</groupId>
+    	<artifactId>bcprov-ext-jdk15on</artifactId>
+    	<version>1.46</version>
+	</dependency>
+
+	<dependency>
+			<groupId>com.vivo.internet</groupId>
+		    <artifactId>security-sdk</artifactId>
+		    <version>1.0.4-20170104-RELEASE</version>
+	</dependency>
   </dependencies>
   <build>
     <finalName>java-study</finalName>

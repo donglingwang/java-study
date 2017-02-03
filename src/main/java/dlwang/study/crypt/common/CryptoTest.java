@@ -11,6 +11,7 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.util.encoders.Hex;
 
 public class CryptoTest {
 
@@ -26,8 +27,7 @@ public class CryptoTest {
 		
 		byte [] result = mac.doFinal(input);
 		
-		System.out.println(Base64.encodeBase64String(result));
-		
+		System.out.println(new String(Hex.encode(result)));
 	}
 	
 	//TODO ²»ÊÇºÜ¶®
@@ -60,7 +60,7 @@ public class CryptoTest {
 	}
 	
 	public static void main(String[] args) throws Exception {
-		//mac();
-		keyAgreement();
+		mac();
+		//keyAgreement();
 	}
 }

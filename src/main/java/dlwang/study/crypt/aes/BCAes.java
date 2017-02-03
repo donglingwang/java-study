@@ -21,7 +21,7 @@ public class BCAes {
 	public static void main(String[] args) throws NoSuchAlgorithmException {
 		// Éú³ÉKEY
 		KeyGenerator keyGenerator = KeyGenerator.getInstance("AES");
-		keyGenerator.init(116);
+		keyGenerator.init(192);
 		SecretKey secretKey = keyGenerator.generateKey();
 		byte [] keyBytes = secretKey.getEncoded();
 		
