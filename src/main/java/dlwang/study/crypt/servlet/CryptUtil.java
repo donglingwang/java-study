@@ -3,6 +3,7 @@ package dlwang.study.crypt.servlet;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,6 +20,7 @@ import org.apache.http.client.ResponseHandler;
 import org.apache.http.client.config.RequestConfig;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.BufferedHttpEntity;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
@@ -26,6 +28,8 @@ import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.junit.Test;
+
+import com.sun.org.apache.bcel.internal.generic.NEW;
 
 import dlwang.study.crypt.cipher.AESCoder;
 import dlwang.study.crypt.cipher.RSACoder;
@@ -104,7 +108,17 @@ public class CryptUtil {
 				int status = response.getStatusLine().getStatusCode();
 				if (status >= 200 && status < 300) {
 					HttpEntity entity = response.getEntity();
-					return entity != null ? EntityUtils.toString(entity) : null;
+					//InputStream stream = entity.getContent();
+					//byte [] result = new byte[stream.available()];
+					//stream.read(result);
+					//System.out.println("here :"+new String(result));
+					if (entity != null) {
+						BufferedHttpEntity entity2 = new BufferedHttpEntity(entity);
+						System.out.println("here:"+EntityUtils.toString(entity2));
+						return EntityUtils.toString(entity2);
+					}
+					return null;
+					//return entity != null ? EntityUtils.toString(entity) : null;
 				} else {
 					throw new ClientProtocolException("Unexpected response status: " + status);
 				}

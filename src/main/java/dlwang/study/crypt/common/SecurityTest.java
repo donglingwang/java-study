@@ -16,11 +16,14 @@ import java.security.MessageDigest;
 import java.security.MessageDigestSpi;
 import java.security.NoSuchAlgorithmException;
 import java.security.PrivateKey;
+import java.security.Provider;
 import java.security.SecureRandom;
 import java.security.Security;
 import java.security.spec.PKCS8EncodedKeySpec;
+import java.util.Map;
 
 import org.apache.commons.codec.binary.Base64;
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
 
 import com.sun.org.apache.bcel.internal.generic.ALOAD;
 import com.sun.org.apache.bcel.internal.generic.NEW;
@@ -28,7 +31,10 @@ import com.sun.org.apache.bcel.internal.generic.NEW;
 import sun.security.util.DisabledAlgorithmConstraints;
 
 public class SecurityTest {
-
+	
+	static {
+		Security.addProvider(new BouncyCastleProvider());
+	}
 
 	
 	public static String getMsgDigest() throws NoSuchAlgorithmException {
@@ -122,6 +128,14 @@ public class SecurityTest {
 		System.out.println(Base64.encodeBase64String(privateKey.getEncoded()));
 	}
  	
+	public static void viewAllProviders() {
+		for (Provider provider : Security.getProviders()) {
+			System.out.println(provider);
+			for (Map.Entry<Object, Object> entry : provider.entrySet()) {
+				System.out.println("\t"+entry.getKey());
+			}
+		}
+	}
 	public static void main(String[] args) throws Exception {
 		//System.out.println(Security.getProperty("security.provider.1"));
 		
@@ -139,6 +153,10 @@ public class SecurityTest {
 		random.setSeed(System.currentTimeMillis());
 		System.out.println(random.nextInt(10000));*/
 		
-		keyPair();
+		//keyPair();
+		
+		viewAllProviders();
 	}
+	
+	
 }

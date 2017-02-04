@@ -11,11 +11,15 @@ import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.DESKeySpec;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.codec.digest.DigestUtils;
 import org.bouncycastle.util.encoders.Hex;
 
 public class CryptoTest {
 
-	// mac消息摘要算法
+	/**
+	 * mac消息摘要算法
+	 * @throws Exception
+	 */
 	public static void mac() throws Exception {
 		byte [] input = "MAC".getBytes();
 		// 
@@ -30,7 +34,10 @@ public class CryptoTest {
 		System.out.println(new String(Hex.encode(result)));
 	}
 	
-	//TODO 不是很懂
+	/**
+	 * 密钥交换算法使用
+	 * @throws Exception
+	 */
 	public static void keyAgreement() throws Exception {
 		KeyPairGenerator kpg = KeyPairGenerator.getInstance("DH");
 		KeyPair keyPair1 = kpg.genKeyPair();
@@ -59,8 +66,15 @@ public class CryptoTest {
 		SecretKey  secretKey2 = keyFactory.generateSecret(dks);
 	}
 	
+	public static void md5() {
+		String input = "md5";
+		byte [] result = DigestUtils.md5(input);
+		System.out.println(org.apache.commons.codec.binary.Hex.encodeHex(result));
+		System.out.println(DigestUtils.md5Hex(input));
+	}
 	public static void main(String[] args) throws Exception {
-		mac();
+		//mac();
 		//keyAgreement();
+		md5();
 	}
 }

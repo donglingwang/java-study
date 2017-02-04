@@ -50,6 +50,7 @@ public class CryptServlet extends HttpServlet {
 			byte [] aesKey = RSACoder.decryptByPublicKey(Hex.decodeHex(rsaKey.toCharArray()), CryptUtil.RSA_PUBLIC_KEY);
 			// 4、使用aes密钥解密上传的数据
 			byte [] result = AESCoder.decrypt(Hex.decodeHex(aesParam.toCharArray()), aesKey);
+			//response.getOutputStream().write("hello".getBytes());
 			response.getWriter().write("*******"+new String(result)+"******");
 			response.getWriter().flush();
 			
